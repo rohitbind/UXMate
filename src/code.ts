@@ -7,7 +7,7 @@ initialStore();
 
 if (figma.editorType === 'figma') {
   
-  figma.showUI(__html__, {width: 380, height: 500, title: 'Design Mate'});
+  figma.showUI(__html__, {width: 380, height: 500, title: 'UX Mate'});
   getSelectedText();
 
   figma.ui.onmessage = msg => {
