@@ -2,6 +2,7 @@
 import { getSelectedText } from "./selectedText"
 import { initialStore } from "./initialStore"
 import { sendMessageToAI } from "./sendMessageToAI"
+import { sendToImageAI } from "./sendToImageAI"
 
 initialStore();
 
@@ -17,6 +18,9 @@ if (figma.editorType === 'figma') {
     }
     else if (msg.type === 'updateSelection') {
       getSelectedText();
+    }
+    else if (msg.imagePromptValue){
+      sendToImageAI(msg.imagePromptValue);
     }
   };
 }

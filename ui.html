@@ -59,7 +59,7 @@
           </div>
         </div>
         <div class="generateCTAGroup">
-          <button class="generateCTA mainCTA" id="generateCTA">Generate</button>
+          <button class="generateCTA mainCTA" id="generateCTA">Generate Copy</button>
         </div>
       </div>
       <div class="suggestion" id="suggestionContainer">
@@ -75,8 +75,26 @@
     </div>
     
     <div id="icons" class="category" style="display:none">
-      <h2 class="font-18-medium comingSoon">illustration Assistant<br>Coming Soon</h2>
-      <p></p> 
+      <div class="control">
+        <div class="selectedTextGroup pd-bottom-15" id="imagePromptGroupID">
+          <div class="instructionsTitleText pd-bottom-5">
+            <span class="title font-12-medium">Enter your prompt</span>
+          </div>
+          <div class="instructionInput">
+            <textarea id="imagePromptInputBox" name="imagePromptInputBox" rows="2" cols="50" class="inputBox" placeholder="Enter your prompt here">Cat in forest</textarea>
+          </div>
+        </div>
+        <div class="generateCTAGroup">
+          <button class="generateCTA mainCTA" id="imageGenerateCTA">Generate Image</button>
+        </div>
+      </div>
+      <div class="suggestion" id="suggestionContainer">
+        <div class="suggList">
+          <div class="singleSugg font-12-medium" id="imageRenderBox">
+            
+          </div>
+        </div>
+      </div>
     </div>
     
     <div id="layout" class="category" style="display:none">
@@ -269,6 +287,9 @@
   #refreshSelection svg {
     fill: #333;
   }
+  .generatedImage{
+    width: 100%;
+  }
 </style>
 
 <script>
@@ -319,6 +340,12 @@
     parent.postMessage({ pluginMessage: { promptMessage } }, '*');
   }
 
+  document.getElementById("imageGenerateCTA").onclick = () => {
+    const prompt = document.getElementById("imagePromptInputBox");
+    const imagePromptValue = prompt.value;
+    parent.postMessage({ pluginMessage: { imagePromptValue } }, '*');
+  }
+
   onmessage = (event) => {
     if (event.data.pluginMessage.selectedTextValueUI) {
       let selectedText = event.data.pluginMessage.selectedTextValueUI;
@@ -345,6 +372,14 @@
       let suggestion = event.data.pluginMessage.newSuggestion;
       let formattedResponse = suggestion.replace(/\n/g, "<br>");
       document.getElementById("suggestionBox").innerHTML = formattedResponse;
+    } else if (event.data.error) {
+      let errorMessage = event.data.error;
+      document.getElementById("errorMessage").innerText = errorMessage;
+    }
+
+    if (event.data.pluginMessage.imageOutput) {
+      let imageURL = event.data.pluginMessage.imageOutput;
+      document.getElementById("imageRenderBox").innerHTML = '<img src="'+imageURL+'" class="generatedImage">';
     } else if (event.data.error) {
       let errorMessage = event.data.error;
       document.getElementById("errorMessage").innerText = errorMessage;
