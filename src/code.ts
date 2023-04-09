@@ -1,3 +1,5 @@
+import { getSelectedText } from "./selectedText"
+
 // API Key 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
 
 // Send a request to the OpenAI API
@@ -26,17 +28,7 @@ if (figma.editorType === 'figma') {
   };
 
   function selectedText(){
-    const selection = figma.currentPage.selection.filter(node => node.type === "TEXT");
-
-    if (selection.length > 0) {
-      const selectedText = selection[0];
-      const selectedTextValue = selectedText.name;
-      figma.ui.postMessage({ selectedTextValueUI: selectedTextValue });
-    }
-    else{
-      figma.notify("Please select a text layer!", { timeout: 3000 });
-      figma.closePlugin();
-    }
+    getSelectedText();
   }
 
   async function storeMessage(message: { role: string, content: string }) {
