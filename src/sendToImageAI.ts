@@ -12,14 +12,15 @@ async function sendToImageAI(msg : string) {
     const imagePrompt = msg;
 
     (async () => {
-        console.log(imagePrompt);
+        figma.ui.postMessage({ imageRenderLoader:  "show"});
         try {
           const response = await fetch('https://stable-diffusion-v2.p.rapidapi.com/stable-diffusion?description='+imagePrompt, options);
           const data = await response.json();
-          console.log(data);
+          figma.ui.postMessage({ imageRenderLoader:  "hide"});
           figma.ui.postMessage({ imageOutput: data });
         } catch (error) {
           console.error(error);
+          figma.ui.postMessage({ imageRenderLoader:  "hide"});
         }
     })();
   }

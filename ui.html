@@ -88,7 +88,7 @@
           <button class="generateCTA mainCTA" id="imageGenerateCTA">Generate Image</button>
         </div>
       </div>
-      <div class="suggestion" id="suggestionContainer">
+      <div class="suggestion" id="imageSuggestionContainer">
         <div class="suggList">
           <div class="singleSugg font-12-medium" id="imageRenderBox">
             
@@ -275,6 +275,10 @@
     border-radius: 2px;
   }
 
+  .imageloader lines {
+    height: 100px;
+  }
+
   @keyframes placeholderShimmer {
     0% {
       background-position: -468px 0;
@@ -290,12 +294,16 @@
   .generatedImage{
     width: 100%;
   }
+  #imageSuggestionContainer{
+    display: none;
+  }
 </style>
 
 <script>
 
   document.getElementById("instructionGroupID").style.display = "none";
   document.getElementById("suggestionContainer").style.display = "none";
+  document.getElementById("imageSuggestionContainer").style.display = "none";
 
   document.getElementById("showHideInstructionCTA").onclick = () => {
     
@@ -361,6 +369,19 @@
         document.getElementById("suggestionBox").innerHTML = '<div class="loader"><lines class="shine"></lines><lines class="shine"></lines><lines class="shine"></lines><lines class="shine"></lines><lines class="shine"></lines></div>';
       }
       else if(event.data.pluginMessage.loaderShow === "hide"){
+        
+      }
+    } else if (event.data.error) {
+      let errorMessage = event.data.error;
+      document.getElementById("errorMessage").innerText = errorMessage;
+    }
+
+    if (event.data.pluginMessage.imageRenderLoader) {
+      if(event.data.pluginMessage.imageRenderLoader === "show"){
+        document.getElementById("imageSuggestionContainer").style.display = "block";
+        document.getElementById("imageRenderBox").innerHTML = '<div class="imageloader loader"><lines class="shine"></div>';
+      }
+      else if(event.data.pluginMessage.imageRenderLoader === "hide"){
         
       }
     } else if (event.data.error) {
