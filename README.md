@@ -5,6 +5,7 @@ UX Mate is a Figma plugin that helps designers enhance their capabilities by usi
 ## Installation
 
 To install UX Mate, run the following command in your terminal:
+
 `npm install`
 
 
@@ -19,7 +20,7 @@ To build UX Mate, run the following command in your terminal:
 
 To watch for changes in the code and automatically build UX Mate, run the following command in your terminal:
 
-npm run build -- --watch
+`npm run build -- --watch`
 
 
 ## Contributing
