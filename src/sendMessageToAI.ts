@@ -3,7 +3,7 @@ import { storeMessage } from "./storeMessage"
 // Send a request to the OpenAI API
 const apiKey = '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';
 
-async function intractWithAI(msg : string) {
+async function sendMessageToAI(msg : string) {
 
     console.log("Me : "+ msg);
 
@@ -42,4 +42,4 @@ async function intractWithAI(msg : string) {
     })();
   }
 
-  export {intractWithAI};
+  export {sendMessageToAI};

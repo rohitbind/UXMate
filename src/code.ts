@@ -1,6 +1,7 @@
+// This is the root file
 import { getSelectedText } from "./selectedText"
 import { initialStore } from "./initialStore"
-import { intractWithAI } from "./intractWithAI"
+import { sendMessageToAI } from "./sendMessageToAI"
 
 initialStore();
 
@@ -12,7 +13,7 @@ if (figma.editorType === 'figma') {
   figma.ui.onmessage = msg => {
     if(msg.promptMessage){
       let message = msg.promptMessage;
-      intractWithAI(message);
+      sendMessageToAI(message);
     }
     else if (msg.type === 'updateSelection') {
       getSelectedText();
