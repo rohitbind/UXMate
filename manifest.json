@@ -2,7 +2,7 @@
   "name": "Design Mate",
   "id": "1225730848957458134",
   "api": "1.0.0",
-  "main": "code.js",
+  "main": "dist/code.js",
   "capabilities": [],
   "enableProposedApi": false,
   "editorType": [
