@@ -1,45 +1,47 @@
 import { storeMessage } from "./storeMessage"
-
-// API Key 2
-const apiKey = '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';
+import { openAPIKey } from "./apiKeys"
 
 async function sendMessageToAI(msg : string) {
 
-    console.log("Me : "+ msg);
+  const apiKey = await openAPIKey();
 
-    const userMessage = {role: "user", content: msg};
-    await storeMessage(userMessage);
+  console.log(apiKey);
 
-    const messageValue = await figma.clientStorage.getAsync("message");
+  console.log("Me : "+ msg);
 
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
-      },
-      body: JSON.stringify({
-        model: "gpt-3.5-turbo",
-        messages: messageValue
-      })
-    };
+  const userMessage = {role: "user", content: msg};
+  await storeMessage(userMessage);
 
-    (async () => {
-      figma.ui.postMessage({ loaderShow:  "show"});
+  const messageValue = await figma.clientStorage.getAsync("message");
 
-      const response = await fetch('https://api.openai.com/v1/chat/completions', requestOptions)
-      const json = await response.json()
-  
-      const gptResponse = json.choices[0].message;
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: "gpt-3.5-turbo",
+      messages: messageValue
+    })
+  };
 
-      console.log("Elixir async : " + JSON.stringify(gptResponse.content));
-      
-      await storeMessage(gptResponse);
+  (async () => {
+    figma.ui.postMessage({ loaderShow:  "show"});
 
-      figma.ui.postMessage({ loaderShow:  "hide"});
+    const response = await fetch('https://api.openai.com/v1/chat/completions', requestOptions)
+    const json = await response.json()
 
-      figma.ui.postMessage({ newSuggestion: gptResponse.content });
-    })();
-  }
+    const gptResponse = json.choices[0].message;
 
-  export {sendMessageToAI};
+    console.log("Elixir async : " + JSON.stringify(gptResponse.content));
+    
+    await storeMessage(gptResponse);
+
+    figma.ui.postMessage({ loaderShow:  "hide"});
+
+    figma.ui.postMessage({ newSuggestion: gptResponse.content });
+  })();
+}
+
+export {sendMessageToAI};

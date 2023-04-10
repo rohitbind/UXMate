@@ -1,13 +1,9 @@
+import { stableDiffusionKey } from "./apiKeys"
+
 
 async function sendToImageAI(msg : string) {
 
-    const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': '2518b9f08amshc6f3f2367961794p1d0a5djsn4caf1c310f12',
-            'X-RapidAPI-Host': 'stable-diffusion-v2.p.rapidapi.com'
-        }
-    };
+    const options = await stableDiffusionKey();
 
     const imagePrompt = msg;
 
