@@ -22,6 +22,8 @@ To watch for changes in the code and automatically build UX Mate, run the follow
 
 `npm run build -- --watch`
 
+You will have to run this plugin on Figma. Please follow figma guideline to install the plugin manually.
+
 
 ## Contributing
 
