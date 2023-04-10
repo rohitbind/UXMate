@@ -1,7 +1,7 @@
 import { storeMessage } from "./storeMessage"
 
-// API Key 1
-const apiKey = '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';
+// API Key 2
+const apiKey = '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';
 
 async function sendMessageToAI(msg : string) {
 
