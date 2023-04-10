@@ -4,7 +4,7 @@ async function sendToImageAI(msg : string) {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '1567d100dcmshe4bb4a1618d084cp1b4c3bjsn1eca5283b17d',
+            'X-RapidAPI-Key': '2518b9f08amshc6f3f2367961794p1d0a5djsn4caf1c310f12',
             'X-RapidAPI-Host': 'stable-diffusion-v2.p.rapidapi.com'
         }
     };

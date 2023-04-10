@@ -1,7 +1,7 @@
 import { storeMessage } from "./storeMessage"
 
-// Send a request to the OpenAI API
-const apiKey = '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';
+// API Key 1
+const apiKey = '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';
 
 async function sendMessageToAI(msg : string) {
 
